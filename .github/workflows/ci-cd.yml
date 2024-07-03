@@ -64,7 +64,7 @@ jobs:
           SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
       - name: List contents of the build directory
         run: |
-          ls -l build
+          ls -la
       - name: Copy files to the server
         run: |
           scp -r build/* $SSH_USER@$SSH_HOST:~/public
