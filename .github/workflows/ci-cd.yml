@@ -66,6 +66,11 @@ jobs:
       - name: List contents of the build directory
         run: |
           ls
+      - name: Set temporary secret variable
+        run: echo "::set-env name=DEBUG_SSH_HOST::${{ secrets.SSH_HOST }}"
+      - name: Debug using temporary secret variable
+        run: |
+          echo "Temporary secret value: $DEBUG_SSH_HOST"
       - name: Test SSH connection
         run: ssh -o StrictHostKeyChecking=no $SSH_USER@$SSH_HOST "echo Connected successfully"
         env:
