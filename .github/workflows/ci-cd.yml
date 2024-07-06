@@ -67,7 +67,7 @@ jobs:
         run: |
           ls
       - name: Test SSH connection
-        run: ssh -o -v StrictHostKeyChecking=no $SSH_USER@$SSH_HOST "echo Connected successfully"
+        run: ssh -v -o StrictHostKeyChecking=no $SSH_USER@$SSH_HOST "echo Connected successfully"
         env:
            SSH_HOST: ${{ secrets.SSH_HOST }}
            SSH_USER: ${{ secrets.SSH_USER }}
