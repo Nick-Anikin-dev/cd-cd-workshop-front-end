@@ -68,7 +68,7 @@ jobs:
           ls -la
       - name: Copy files to the server
         run: |
-          scp -v -r build/* $SSH_USER@$SSH_HOST:~/public
+          scp -vvv -r build/* $SSH_USER@$SSH_HOST:~/public
         env:
           SSH_HOST: ${{ secrets.SSH_HOST }}
           SSH_USER: ${{ secrets.SSH_USER }}
