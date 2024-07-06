@@ -68,6 +68,9 @@ jobs:
           ls
       - name: Test SSH connection
         run: ssh -o StrictHostKeyChecking=no $SSH_USER@$SSH_HOST "echo Connected successfully"
+        env:
+           SSH_HOST: ${{ secrets.SSH_HOST }}
+           SSH_USER: ${{ secrets.SSH_USER }}
       - name: Copy files to the server
         run: |
           scp -r build/* $SSH_USER@$SSH_HOST:~/public
