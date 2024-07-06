@@ -8,7 +8,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          CI/CD Workshop fix
+          CI/CD Workshop fix - ${process.env.REACT_APP_API_URL}
         </p>
         <a
           className="App-link"
