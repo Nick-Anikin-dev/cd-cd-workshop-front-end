@@ -67,7 +67,7 @@ jobs:
         run: |
           ls
       - name: Test SSH connection
-        run: ssh $SSH_USER@$SSH_HOST "echo Connected successfully"
+        run: ssh -o StrictHostKeyChecking=no $SSH_USER@$SSH_HOST "echo Connected successfully"
       - name: Copy files to the server
         run: |
           scp -r build/* $SSH_USER@$SSH_HOST:~/public
