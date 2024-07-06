@@ -63,12 +63,9 @@ jobs:
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
-      - name: List contents of the build directory
-        run: |
-          ls -la
       - name: Copy files to the server
         run: |
-          scp -vvv -r build/* $SSH_USER@$SSH_HOST:~/public
+          scp -i /.ssh/id_rsa -r build/* $SSH_USER@$SSH_HOST:~/public
         env:
           SSH_HOST: ${{ secrets.SSH_HOST }}
           SSH_USER: ${{ secrets.SSH_USER }}
