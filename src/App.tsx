@@ -7,9 +7,8 @@ function App() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>Hello Eleonora</p>
         <p>
-          CI/CD Workshop fix - ${process.env.REACT_APP_BACKEND_URL}
+          CI/CD Workshop fix - {process.env.REACT_APP_BACKEND_URL}
         </p>
         <a
           className="App-link"

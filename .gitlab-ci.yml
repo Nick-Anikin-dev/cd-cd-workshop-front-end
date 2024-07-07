@@ -1,0 +1,32 @@
+stages:
+  - test
+  - deploy
+
+image: node:20.13.1-alpine
+
+cache:
+  key:
+    files:
+      - package-lock.json
+    paths:
+      - .npm/
+
+before_script:
+  - npm ci --cache .npm --prefer-offline
+
+test:
+  stage: test
+  script:
+    - npm run test
+
+deploy:
+  stage: deploy
+  script:
+    - apk --update add openssh-client scp
+    - eval $(ssh-agent -s)
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+    - npm run build
+    - scp -r build/* $SSH_USER@$SSH_HOST:~/public
