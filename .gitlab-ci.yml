@@ -1,5 +1,6 @@
 stages:
   - test
+  - build
   - deploy
 
 image: node:20.13.1-alpine
@@ -19,6 +20,15 @@ test:
   script:
     - npm run test
 
+build:
+  stage: build
+  script:
+    - npm run build
+  artifacts:
+    paths:
+      - build
+    expire_in: 1 week
+
 deploy:
   stage: deploy
   script:
@@ -28,5 +38,4 @@ deploy:
     - mkdir -p ~/.ssh
     - chmod 700 ~/.ssh
     - echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
-    - npm run build
     - scp -r build/* $SSH_USER@$SSH_HOST:~/public
